@@ -1,3 +1,8 @@
+# Optimized by ci-cost (https://github.com/mariotavarez/ci-cost)
+# Applied 1 optimization:
+# - [MEDIUM] Add concurrency group to "autofix.yml"
+# Estimated savings: ~2 min/run
+#
 name: autofix.ci  # needed to securely identify the workflow
 
 on:
@@ -6,6 +11,10 @@ on:
   push:
     branches: [ "main" ]
 
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 permissions:
   contents: read
 
